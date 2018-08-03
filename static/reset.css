@@ -1,0 +1,51 @@
+﻿@charset "utf-8";
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,input,button,textarea,select,p,span,font,em,i,b,strong,button{margin:0;padding:0;}
+body{margin:0;font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"宋体"; background:#fff; overflow:visible; color:#666666;}
+html, body { height: 100%;}
+input,select{font-size:12px;line-height:16px; border:0 none; vertical-align:middle;}
+button{ border:0 none;}
+.clear{clear:both;padding:0px;margin:0px;}
+img{border:0;}
+a {outline: none;}
+a:focus { outline:0; }
+input,button,select,textarea{outline:none}
+ul,li{list-style-type:none;_list-style:outside;}
+a{ text-decoration:none; color:#333;}
+a:hover{ color:#ff6600;}
+/* new clearfix清除浮动 */
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+.clearfix { display: block;zoom:1 }
+* html .clearfix {height: 1%; zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+html[xmlns] .clearfix { display: block; zoom:1}
+/*清除浮动-end*/
+h1,h2,h3,h4,h5,h6{font-weight: normal}
+
+/*这一句是用来解决在安卓上的点击出现篮框问题*/
+body{ -webkit-tap-highlight-color:rgba(0,0,0,0); }
+/*下面是解决ios上去除微信点击蓝色边框 */
+a:focus,
+input:focus,
+p:focus,
+div:focus{
+-webkit-tap-highlight-color:rgba(0,0,0,0);
+-webkit-user-modify:read-only;
+}
+@font-face {font-family: "yzfont";
+  src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff') format('woff'), /* chrome、firefox */
+  url('iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('iconfont.svg') format('svg'); /* iOS 4.1- */
+}
+::-webkit-scrollbar {display:none}
+
+body {
+	background: #f5f5f5;
+}
