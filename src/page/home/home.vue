@@ -1,35 +1,23 @@
 <template>
-  <div id="">
+  <div id="" class="home">
     <heads :islogo="true" :islogin="true" ></heads>
     <div class="now-in-address">
       <span class="left">当前定位城市：</span>
       <span class="right">定位不准时，请在城市列表中选择</span>
     </div>
     <div class="now-adderss">
-      <span class="address">深圳</span>  <span class="icon">》</span>    <!-- 加点击跳转 -->
+      <!-- <span class="address">深圳</span>      -->
+      <router-link tag="span" class="address" :to="'/city/' + nowCityId">深圳</router-link>
+      <span class="icon">></span> 
     </div>
     <div class="hot-title">热门城市</div>
     <ul class="hot-list">
-      <router-link to="" tag="li" class="hot-item" v-for="(city,index) in hotList" :key="index">{{city.name}}</router-link>  <!-- 加点击跳转 -->
+      <router-link :to="'/city/' + city.id" tag="li" class="hot-item" v-for="(city,index) in hotList" :key="index">{{city.name}}</router-link>  <!-- 加点击跳转 -->
     </ul>
-    <div class="all-city-box">
-      <div class="all-city-title">A</div>
-      <ul class="all-city-list">
-        <router-link to="" tag="li" class="all-city-item">
-          长沙
-        </router-link>
-        <router-link to="" tag="li" class="all-city-item">
-          长沙
-        </router-link>
-        <router-link to="" tag="li" class="all-city-item">
-          长沙
-        </router-link>
-        <router-link to="" tag="li" class="all-city-item">
-          长沙
-        </router-link>
-        <router-link to="" tag="li" class="all-city-item">
-          长沙12
-        </router-link>
+    <div v-cloak class="all-city-box" v-for="(value,index) in allCity" :key="index" >
+      <div class="all-city-title">{{index}}</div>
+      <ul class="all-city-list" >
+        <router-link :to="'/city/' + value.id" tag="li" class="all-city-item" v-for="(value,index) in value" :key="index">{{value.name}}</router-link>
       </ul>
     </div>
   </div>
@@ -49,7 +37,13 @@ export default {
     }
   },
   computed: {
-
+    allCity() {
+      var all = {};
+      for (let i = 65; i < 91; i++) {
+        all[String.fromCharCode(i)] = this.allList[String.fromCharCode(i)];
+      }
+      return all;
+    }
   },
   methods: {
 
@@ -57,10 +51,17 @@ export default {
   mounted() { 
     this.nowCity = '深圳';
     this.nowCityId = 11;
+
+    fetch("/v1/cities",{type:"hot"}).then((res)=>{
+      // console.log(res);
+      this.hotList = res;
+    });
     
     fetch("/v1/cities",{type:"group"}).then((res)=>{
-      console.log(res);
+      // console.log(res);
+      this.allList = res;
     });
+
   },
   components: {
     heads,
@@ -71,6 +72,9 @@ export default {
 </script>
 
 <style lang="less">
+.home {
+  padding-top: 1.2rem;
+}
 .now-in-address {
   height: 1.1rem;
   line-height: 1.4rem;
@@ -158,6 +162,9 @@ export default {
     border-right: 1px solid #f1f1f1;
     border-bottom: 1px solid #f1f1f1;
     font-size: 0.4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 </style>
